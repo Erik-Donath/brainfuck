@@ -6,16 +6,19 @@ namespace brainfuck {
 
         public readonly string original;
 
-        public Tuple<brainfuck.Type, Object>[] code { get; private set; }
+        public AssemblyCode code {get; private set; }
 
-        public Tuple<int,int> loops { get; private set; }
+        public int exitCode { get; private set; }
 
-        public bool isRunnable { get; private set; }
+        public bool isRunning { get; private set; }
+        public bool isCompiled {get; private set; }
 
-        public Code() {
-               
+        public Code(string original, bool run = false) {
+            // TODO: Write Implementation
+            this.original = original;
 
-
+            if(run)
+                Run();
         }
 
         private Byte[] stack;
@@ -46,11 +49,22 @@ namespace brainfuck {
         }
 
         public void Compile() {
-
+            code = brainfuck.Compiler.Compile(original);
         }
 
         public int Run() {
-            return 0; // TODO: Write Run Funktion
+            if(!isCompiled)
+                Compile();
+
+            if(!code.isRunnable)
+                return 1;
+            isRunning = true;
+
+            // Stuff to do here
+
+            isRunning = false;
+            exitCode = 0;
+            return exitCode;
         }
     }
 
