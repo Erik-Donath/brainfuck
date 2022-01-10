@@ -4,13 +4,13 @@ namespace brainfuck {
 
     public class AssemblyCode {
 
-        public readonly Tuple<brainfuck.Type, Object>[] code;
+        public readonly Tuple<brainfuck.Type, IOperator>[] code;
 
         public readonly Tuple<int,int> loops;
 
         public readonly bool isRunnable;
 
-        public AssemblyCode(Tuple<brainfuck.Type, Object>[] code, Tuple<int,int> loops, bool isRunnable) {
+        public AssemblyCode(Tuple<brainfuck.Type, IOperator>[] code, Tuple<int,int> loops, bool isRunnable) {
             this.code = code;
             this.loops = loops;
             this.isRunnable = isRunnable;
@@ -21,7 +21,7 @@ namespace brainfuck {
 
             str += "Code:";
             for(int i = 0; i < code.Length; i++)
-                str += i + ": { Type: " + Enum.GetName(typeof(brainfuck.Type), code[i].Item1) + ", " + code[i].Item2.ToString() + "}";
+                str += i + ": { Type: " + Enum.GetName(typeof(brainfuck.Type), code[i].Item1) + ", " + code[i].Item2.ToString() + " }";
             
             str += "Loops:";
             for(int i = 0; i < loops.Length; i++)
